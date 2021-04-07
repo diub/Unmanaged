@@ -172,30 +172,6 @@ namespace diub.Unmanaged {
 			}
 		}
 
-		// 2018-08-01
-		//public void TestHashCode () {
-		//	Int32 s, t, b;
-
-		//	String str;
-		//	Text text;
-		//	char ch;
-
-		//	text = "";
-		//	ch = '0';
-		//	for (int i = 0; i < 67 * 1024 + 13; i++) {
-		//		text.Append (ch);
-		//		str = text;
-		//		s = Hash.GetRealHashCode (str);
-		//		t = Hash.GetRealHashCode (text);
-		//		b = diub.x86.UnsafeFixes.GetHashCodeChar (text.CharArray, text.Offset, text.Length );
-		//		if (s != t || s != b || t != b) {
-		//		}
-		//		ch++;
-		//		if (ch > '9')
-		//			ch = '0';
-		//	}
-		//}
-
 	}   // class
 
 }   //	namespace	2017-11-29_10.45.00

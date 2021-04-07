@@ -5,111 +5,71 @@ namespace diub.Unmanaged {
 	unsafe static public class ValueToArray {
 
 		/// <summary>
-		/// C# pointers not really pointers!!!!
+		/// Schreibt die Byte-Darstellung von <paramref name="Value"/> an der Position <paramref name="Offset"/> 
+		/// in das Byte-Array <paramref name="Array"/>.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
+		/// <typeparam name="T">sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool</typeparam>
 		/// <param name="Array"></param>
 		/// <param name="Offset"></param>
-		/// <param name="Value"></param>
-		//static public void Value<T> (byte [] Array, Int32 Offset, T Value) where T : struct {
-		//	fixed (byte* ptr = Array) {
-		//		byte* vp = ptr + Offset;
-		//		*(T*) vp = Value;
-		//	}
-		//}
-
-		static public void Value (this byte [] Array, Int32 Offset, Int16 Value) {
+		/// <param name="Value">Wert vom Type sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool.</param>
+		static public void Value<T> (this byte [] Array, Int32 Offset, T Value)
+			where T : unmanaged {
 			fixed (byte* ptr = Array) {
-				Int16* vp = (Int16*) (ptr + Offset);
+				T* vp = (T*) (ptr + Offset);
 				*vp = Value;
 			}
 		}
 
-		static public void Value (this byte [] Array, ref Int32 Offset, Int16 Value) {
+		/// <summary>
+		/// Schreibt die Byte-Darstellung von <paramref name="Value"/> an der Position <paramref name="Offset"/> 
+		/// in das Byte-Array <paramref name="Array"/>.<para></para>
+		/// Der Wert der Variablen <paramref name="Offset"/> wird dabei um der Anzahl der gelesenen Bytes vergrößert.
+		/// </summary>
+		/// <typeparam name="T">sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool</typeparam>
+		/// <param name="Array"></param>
+		/// <param name="Offset"></param>
+		/// <param name="Value">Wert vom Type sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool.</param>
+		static public void Value<T> (this byte [] Array, ref Int32 Offset, T Value)
+			where T : unmanaged {
 			fixed (byte* ptr = Array) {
-				Int32* vp = (Int32*) (ptr + Offset);
-				*vp = Value;
-				Offset += 2;
-			}
-		}
-
-		static public void Value (this byte [] Array, Int32 Offset, Int32 Value) {
-			fixed (byte* ptr = Array) {
-				Int32* vp = (Int32*) (ptr + Offset);
-				*vp = Value;
-			}
-		}
-
-		static public void Value (this byte [] Array, ref Int32 Offset, Int32 Value) {
-			fixed (byte* ptr = Array) {
-				Int32* vp = (Int32*) (ptr + Offset);
-				*vp = Value;
-				Offset += 4;
-			}
-		}
-
-		static public void Value (this byte [] Array, Int32 Offset, Int64 Value) {
-			fixed (byte* ptr = Array) {
-				Int64* vp = (Int64*) (ptr + Offset);
+				T* vp = (T*) (ptr + Offset);
 				*vp = Value;
 			}
+			Offset += sizeof (T);
 		}
 
-		static public void Value (this byte [] Array, ref Int32 Offset, Int64 Value) {
+		/// <summary>
+		/// Liest den Rückgabe-Wert aus der Byte-Darstellung ab der Position <paramref name="Offset"/> aus dem Byte-Array <paramref name="Array"/>.
+		/// </summary>
+		/// <typeparam name="T">sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool.</typeparam>
+		/// <param name="Array"></param>
+		/// <param name="Offset"></param>
+		/// <returns></returns>
+		static public T Value<T> (this byte [] Array, Int32 Offset)
+			where T : unmanaged {
 			fixed (byte* ptr = Array) {
-				Int64* vp = (Int64*) (ptr + Offset);
-				*vp = Value;
-				Offset += 8;
-			}
-		}
-
-		//
-
-		static public dynamic Value<T> (this byte [] Array, Int32 Offset) where T : struct {
-
-			fixed (byte* ptr = Array) {
-				switch (Type.GetTypeCode (typeof (T))) {
-					case TypeCode.Int16:
-						Int16* vp16 = (Int16*) (ptr + Offset);
-						return *vp16;
-					case TypeCode.Int32:
-						Int32* vp32 = (Int32*) (ptr + Offset);
-						return *vp32;
-					case TypeCode.Int64:
-						Int64* vp64 = (Int64*) (ptr + Offset);
-						return *vp64;
-				}
-			}
-			throw new Exception ("Not implemented!");
-		}
-
-		static public dynamic Value<T> (this byte [] Array, ref Int32 Offset) where T : struct {
-			fixed (byte* ptr = Array) {
-				switch (Type.GetTypeCode (typeof (T))) {
-					case TypeCode.Int16:
-						Int16* vp16 = (Int16*) (ptr + Offset);
-						Offset += 2;
-						return *vp16;
-					case TypeCode.Int32:
-						Int32* vp32 = (Int32*) (ptr + Offset);
-						Offset += 4;
-						return *vp32;
-					case TypeCode.Int64:
-						Int64* vp64 = (Int64*) (ptr + Offset);
-						Offset += 8;
-						return *vp64;
-				}
-			}
-			throw new Exception ("Not implemented!");
-		}
-
-		static public Int64 Value (this byte [] Array, Int32 Offset) {
-			fixed (byte* ptr = Array) {
-				Int64* vp = (Int64*) (ptr + Offset);
+				T* vp = (T*) (ptr + Offset);
 				return *vp;
 			}
 		}
 
+		/// <summary>
+		/// Liest den Rückgabe-Wert aus der Byte-Darstellung ab der Position <paramref name="Offset"/> aus dem Byte-Array <paramref name="Array"/>.
+		/// <para></para>
+		/// Der Wert der Variablen <paramref name="Offset"/> wird dabei um der Anzahl der gelesenen Bytes vergrößert.
+		/// </summary>
+		/// <typeparam name="T">sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool</typeparam>
+		/// <param name="Array"></param>
+		/// <param name="Offset"></param>
+		/// <returns></returns>
+		static public T Value<T> (this byte [] Array, ref Int32 Offset)
+			where T : unmanaged {
+			fixed (byte* ptr = Array) {
+				T* vp = (T*) (ptr + Offset);
+				Offset += sizeof (T);
+				return *vp;
+			}
+		}
 
 	}   // class
 

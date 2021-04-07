@@ -24,7 +24,7 @@
 		static  private char [] GREATER_THEN = new char[] {'&','g','t',';' };
 
 		/// <summary>
-		/// Ersetzt (Sonder-)Zeichen gemäß der XML-Konventoinen.
+		/// Ersetzt (Sonder-)Zeichen gemäß der XML-Konventionen.
 		/// </summary>
 		/// <param name="Source"></param>
 		/// <param name="SourceOffset"></param>
@@ -103,33 +103,28 @@
 							continue;
 						}
 						if (ch == '&') {
-							fixed (char* ptr = AMP) {
+							fixed (char* ptr = AMP)
 								CopyChars (ptr, ref target_ptr, AMP.Length);
-							}
 							continue;
 						}
 						if (ch == '\'') {
-							fixed (char* ptr = APOS) {
+							fixed (char* ptr = APOS)
 								CopyChars (ptr, ref target_ptr, APOS.Length);
-							}
 							continue;
 						}
 						if (ch == '"') {
-							fixed (char* ptr = DOUBLE_QUOTE) {
+							fixed (char* ptr = DOUBLE_QUOTE)
 								CopyChars (ptr, ref target_ptr, DOUBLE_QUOTE.Length);
-								continue;
-							}
+							continue;
 						}
 						if (ch == '<') {
-							fixed (char* ptr = LESS_THEN) {
+							fixed (char* ptr = LESS_THEN)
 								CopyChars (ptr, ref target_ptr, LESS_THEN.Length);
-							}
 							continue;
 						}
 						if (ch == '>') {
-							fixed (char* ptr = GREATER_THEN) {
+							fixed (char* ptr = GREATER_THEN)
 								CopyChars (ptr, ref target_ptr, GREATER_THEN.Length);
-							}
 							continue;
 						}
 						// Zeichen zwischen Sonderzeichen usw.
