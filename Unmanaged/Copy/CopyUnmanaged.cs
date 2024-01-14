@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace diub.Unmanaged {
+﻿namespace diub.Transform {
 
 	/// <summary>
 	/// Stellt Funktionen bereit zum Kopieren in und aus Byte-Arrays für "Unmanaged-Types", die "fixed*" verwenden.
@@ -21,8 +15,8 @@ namespace diub.Unmanaged {
 		/// <returns></returns>
 		unsafe static public void CopyUnsafe (byte* Source, byte* Target, Int32 Length) {
 			int i, rest;
-			UInt32 * s, t;
-			byte * bs, bt;
+			UInt32* s, t;
+			byte* bs, bt;
 
 			s = (UInt32*) (Source);
 			t = (UInt32*) (Target);
@@ -74,7 +68,6 @@ namespace diub.Unmanaged {
 				}
 			}
 		}
-
 
 	}   // class
 

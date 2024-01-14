@@ -1,6 +1,6 @@
-﻿namespace diub.Unmanaged {
+﻿namespace diub.Transform {
 
-	public partial class Transform {
+	unsafe static public partial class UnmanagedTransform {
 
 		/// <summary>
 		/// Kopiert Zeichen nach Target und setzt dabei den Zeiger neu!

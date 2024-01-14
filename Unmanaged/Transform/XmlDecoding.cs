@@ -1,6 +1,6 @@
-﻿namespace diub.Unmanaged {
+﻿namespace diub.Transform {
 
-	public partial class Transform {
+	unsafe static public partial class UnmanagedTransform {
 
 		/// <summary>
 		/// Ersetzt Zeichen in UTF-(Sonderzeichen-)Kodierungen (&...;) durch normale Zeichen.

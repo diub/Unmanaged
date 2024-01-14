@@ -1,12 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-using Id = System.Int64;
-
-namespace diub.Unmanaged {
+﻿namespace diub.Transform {
 
 	static public partial class Copy {
 			/// <summary>

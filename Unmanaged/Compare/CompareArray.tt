@@ -10,13 +10,9 @@
 // 'Unmanaged-Type' sind: sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, bool
 //
 
-using System;
-using System.Threading;
-using System.Reflection;
+namespace diub.Universal;
 
-namespace diub.Unmanaged {
-
-	static public partial class CompareArray {
+	static public partial class Comparing {
 
 <#
 	string [] types = new string [] {"sbyte", "byte", "short", "ushort", "int", "uint", "long", "ulong", "char", "float", "double", "decimal","bool"};
@@ -33,8 +29,20 @@ namespace diub.Unmanaged {
 		/// <param name="RightStart">Startpunkt innerhalb des rechten Array.</param>
 		/// <param name="Length">Anzahl der zu vergleichenden Elemente.</param>
 		/// <returns>True: falls vollständig gleich; sonst False.</returns>
-		unsafe static public bool Compare (this <#=item#> [] Left, Int32 LeftStart, <#=item#> [] Right, Int32 RightStart, Int32 Length) {
+		unsafe static public int CompareArray (this <#=item#> [] Left, Int32 LeftStart, <#=item#> [] Right, Int32 RightStart, Int32 Length) {
 			return CompareUnmanaged<<#=item#>> (Left, LeftStart, Right, RightStart, Length);
+		}
+
+		unsafe static public int CompareArray (this <#=item#> [] Left, <#=item#> [] Right) {
+			int i, len;
+
+			len = Left.Length;
+			if (Left.Length > Right.Length)
+				len = Right.Length;
+			i = CompareUnmanaged<<#=item#>> (Left, 0, Right, 0, len);
+			if (i == 0 && Left.Length != Right.Length)
+				return Left.Length - Right.Length;
+			return i;
 		}
 <#
 	}
@@ -42,4 +50,4 @@ namespace diub.Unmanaged {
 
 	}	// class
 
-}	//	namespace	2019-11-02 - 14.48.53
+//	namespace	2019-11-02 - 14.48.53
